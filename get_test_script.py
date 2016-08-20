@@ -38,14 +38,28 @@ def main():
 
     print 'Start scraping...'
 
-    # Selenium-ом на сервер Мониторинга
-    driver = webdriver.PhantomJS(executable_path='drivers\\phantomjs')
-    # driver = webdriver.Chrome(executable_path='drivers\\chromedriver.exe')
-    # driver = webdriver.Firefox()
-    # driver = webdriver.Ie()
-    # driver.set_window_size(1900, 1000)
-    # driver.maximize_window()
+    # Selenium-ом заходим на сервер Мониторинга
+    # Выбор браузера
+    driver = webdriver
+    if get_test_script_cfg.browser.lower() == 'phantomjs':
+        driver = webdriver.PhantomJS(executable_path='drivers\\phantomjs')
+    elif get_test_script_cfg.browser.lower() == 'chrome':
+        driver = webdriver.Chrome(executable_path='drivers\\chromedriver.exe')
+    elif get_test_script_cfg.browser.lower() == 'firefox':
+        driver = webdriver.Firefox()
+    else:
+        print 'In configuration file "get_test_script_cfg.py" is not specified the browser.'
+        exit(1)
 
+    # Установка размера окна браузера
+    try:
+        driver.set_window_size(get_test_script_cfg.browser_size[0],
+                               get_test_script_cfg.browser_size[1])
+    except (AttributeError, TypeError):
+        print 'The size of the window browser is not specified, will be maximum.'
+        driver.maximize_window()
+
+    # Открыть главную страницу сервера
     full_server_name = 'http://' + server_name
     driver.get(full_server_name)
 

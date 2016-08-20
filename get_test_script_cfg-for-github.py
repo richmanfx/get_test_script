@@ -11,3 +11,11 @@ monitor_hosts = (
 user_name = 'username'
 user_pswd = 'password'
 
+# Поддерживаемые браузеры - раскомментировать один!
+# browser = 'phantomjs'
+browser = 'chrome'
+# browser = 'firefox'   # пока не реализовано
+
+# Размер окна браузера, например, (1024, 768)
+# Если закомментировать, то будет максимальный размер окна
+browser_size = (1900, 850)
