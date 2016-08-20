@@ -2,6 +2,7 @@
 from os import system
 
 from selenium import webdriver
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import get_test_script_cfg
 
 VERSION = '1.0.0'
@@ -46,7 +47,8 @@ def main():
     elif get_test_script_cfg.browser.lower() == 'chrome':
         driver = webdriver.Chrome(executable_path='drivers\\chromedriver.exe')
     elif get_test_script_cfg.browser.lower() == 'firefox':
-        driver = webdriver.Firefox()
+        binary = FirefoxBinary('C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe')
+        driver = webdriver.Firefox(firefox_binary=binary)
     else:
         print 'In configuration file "get_test_script_cfg.py" is not specified the browser.'
         exit(1)

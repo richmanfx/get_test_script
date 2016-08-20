@@ -13,8 +13,8 @@ user_pswd = 'password'
 
 # Поддерживаемые браузеры - раскомментировать один!
 # browser = 'phantomjs'
-browser = 'chrome'
-# browser = 'firefox'   # пока не реализовано
+# browser = 'chrome'
+browser = 'firefox'
 
 # Размер окна браузера, например, (1024, 768)
 # Если закомментировать, то будет максимальный размер окна
