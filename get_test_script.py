@@ -3,10 +3,8 @@ from os import system
 from time import sleep
 
 from selenium import webdriver
-from xlwings.constants import TimeUnit
 
 import get_test_script_cfg
-
 
 VERSION = '1.0.0'
 __author__ = 'Aleksandr Jashhuk, Zoer, R5AM, www.r5am.ru'
@@ -45,12 +43,14 @@ def main():
     # driver = webdriver.PhantomJS(executable_path='drivers\\phantomjs')
     driver = webdriver.Chrome(executable_path='drivers\\chromedriver.exe')
     # driver = webdriver.Firefox()
-    driver.set_window_size(1900, 1000)
+    # driver.set_window_size(1900, 1000)
+    driver.maximize_window()
+
     full_server_name = 'http://' + server_name
     driver.get(full_server_name)
 
     # Пока не найдём элемент или 10 секунд (10 сек - для всех, до отмены, глобально)
-    # driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    driver.implicitly_wait(10)
 
     # Доступен ли сервер
     result = driver.title
@@ -66,21 +66,14 @@ def main():
     password_field = driver.find_element_by_xpath('.//*[@id="inputPassword"]')
     password_field.send_keys(get_test_script_cfg.user_pswd)
     driver.find_element_by_xpath('.//*[@id="doLogin"]').click()
-    sleep(3)
 
     # Ищем test-script            
     search_field = driver.find_element_by_xpath('.//input[@type="search"]')
     search_field.send_keys(test_number)
-    sleep(5)
-    #driver.get(full_server_name + '/#test-scripts-' + str(test_number))
     driver.find_element_by_xpath('.//a[@href="#test-detail-' + str(test_number) + '"]').click()
-    sleep(3)
     driver.find_element_by_xpath('.//a[@href="#test-edit-' + str(test_number) + '"]').click()
     
-
-#    driver.get(full_server_name + '/#test-detail-' + test_number)	# https://autotest.admtyumen.ru/#test-detail-40
-
-    sleep(15)      # Посмотреть результат ( в Хроме )
+    sleep(0)      # Посмотреть результат ( в Хроме )
     driver.close()
     #################################################################################################################
 
