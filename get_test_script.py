@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from os import system
 
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium import webdriver
 import get_test_script_cfg
@@ -84,7 +85,12 @@ def main():
     # Поиск test-script
     search_field = driver.find_element_by_xpath('.//input[@type="search"]')
     search_field.send_keys(test_number)
-    driver.find_element_by_xpath('.//a[@href="#test-detail-' + str(test_number) + '"]').click()
+    try:
+        driver.find_element_by_xpath('.//a[@href="#test-detail-' + str(test_number) + '"]').click()
+    except NoSuchElementException:
+        print 'Test ' + str(test_number) + ' was not found.'
+        driver.quit()
+        exit(1)
     driver.find_element_by_xpath('.//a[@href="#test-edit-' + str(test_number) + '"]').click()
 
     # Поиск кода теста
