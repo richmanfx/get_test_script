@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from os import system
 
-from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium import webdriver
 import get_test_script_cfg
 
 VERSION = '1.0.0'
@@ -91,7 +91,7 @@ def main():
     test_code = driver.find_element_by_xpath('.//textarea[@id ="code"]').get_attribute('value')
 
     # Запись файла test-script
-    test_code_file_name = 'U' + str(test_number) + '.online.xml'
+    test_code_file_name = get_test_script_cfg.test_script_file_path + 'U' + str(test_number) + '.online.xml'
     try:
         test_code_file = open(test_code_file_name, 'w')
         test_code_file.write(test_code.encode('utf-8'))         # Писать файл в UTF-8

@@ -11,6 +11,9 @@ monitor_hosts = (
 user_name = 'username'
 user_pswd = 'password'
 
+# Папка для файлов test-скриптов
+test_script_file_path = 'c:\\STORAGE\\PROGRA\\Work\\TumenEPGU\\tests\\'
+
 # Поддерживаемые браузеры - раскомментировать один!
 # browser = 'phantomjs'
 # browser = 'chrome'

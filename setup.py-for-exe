@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+# Это файл setup.py для создания EXE-файла с помощью cx_Freeze
+# http://cx-freeze.readthedocs.io/en/latest/distutils.html
+# Run the build process by running the command 'python setup.py build'
+
+from cx_Freeze import setup, Executable
+
+executables = [
+    Executable('get_test_script.py')
+]
+
+setup(name='get_test_script',
+      version='1.0.1',
+      description='Scraper test-scripts.',
+      executables=executables
+      )
