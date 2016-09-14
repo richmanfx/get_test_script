@@ -24,18 +24,18 @@ def main():
     print 'You chose the server: ' + server_name + '\n'
 
     # Ввод номера тест-скрипта
-    print 'Input number of test-script (1...10000):',
+    print 'Input number of test-script (1...100000):',
     test_number = 0
     try:
         test_number = int(raw_input())
     except ValueError:
-        print 'You need to enter an integer from 1 to 10000. Bye.'
+        print 'You need to enter an integer from 1 to 100000. Bye.'
         exit(1)
 
     # Проверка допустимого значения номера тест-скрипта
-    status = valid_range(1, 10000, test_number)
+    status = valid_range(1, 100000, test_number)
     if not status:
-        print "An out of range number. You need to enter an integer from 1 to 10000. Bye."
+        print "An out of range number. You need to enter an integer from 1 to 100000. Bye."
         exit(1)
 
     print 'Start scraping...'
