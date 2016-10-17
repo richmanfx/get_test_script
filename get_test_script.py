@@ -30,12 +30,14 @@ def main():
         test_number = int(raw_input())
     except ValueError:
         print 'You need to enter an integer from 1 to 100000. Bye.'
+        input()
         exit(1)
 
     # Проверка допустимого значения номера тест-скрипта
     status = valid_range(1, 100000, test_number)
     if not status:
         print "An out of range number. You need to enter an integer from 1 to 100000. Bye."
+        input()
         exit(1)
 
     print 'Start scraping...'
@@ -52,6 +54,7 @@ def main():
         driver = webdriver.Firefox(firefox_binary=binary)
     else:
         print 'In configuration file "get_test_script_cfg.py" is not specified the browser.'
+        input()
         exit(1)
 
     # Установка размера окна браузера
@@ -60,6 +63,7 @@ def main():
                                get_test_script_cfg.browser_size[1])
     except (AttributeError, TypeError):
         print 'The size of the window browser is not specified, will be maximum.'
+        input()
         driver.maximize_window()
 
     # Открыть главную страницу сервера
@@ -73,6 +77,7 @@ def main():
     result = driver.title
     if result != u'Мониторинг':
         print 'Website or page is unavailable.'
+        input()
         exit(1)
 
     # Логинимся
@@ -89,6 +94,7 @@ def main():
         driver.find_element_by_xpath('.//a[@href="#test-detail-' + str(test_number) + '"]').click()
     except NoSuchElementException:
         print 'Test ' + str(test_number) + ' was not found.'
+        input()
         driver.quit()
         exit(1)
     driver.find_element_by_xpath('.//a[@href="#test-edit-' + str(test_number) + '"]').click()
@@ -108,6 +114,7 @@ def main():
         exit(1)
 
     print 'File \"' + test_code_file_name + '\" written successfully.'
+    input()
 
     driver.quit()
 
